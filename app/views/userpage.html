@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>{{ userinfo['name'] }}'s Page</h1>
+	<p>Count: {{userinfo['count']}}</p>
+
+	{% for userquote in userquotes %}
+	<p>{{userquote['quote_author']}}: {{userquote['quote']}} </p>
+	
+	{% endfor%}
+</body>
+</html>

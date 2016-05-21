@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quotes</title>
+</head>
+<body>
+	<div id="container">
+		<h1>Welcome {{ session['logged_user']['name'] }}!</h1>
+		<a href="/logout">Log out</a>
+
+		<div id="Nonfaves">
+			<fieldset>
+				<legend>Quoteable Quotes</legend>
+				{% for nonfave in nonfaves %}
+				<div>
+					<p>{{ nonfave['quote_author'] }}: {{ nonfave['quote'] }}</p>
+					<p>Posted by: <a href="/userpage/{{nonfave['p_id']}}">{{ nonfave['name'] }}</a></p>
+					<a href="/addfavorite/{{session['logged_user']['id']}}/{{nonfave['q_id']}}"><button>Add to Favorites</button></a>
+				</div>
+				{% endfor %}
+			</fieldset>
+		</div>
+		<div id="faves">
+			<fieldset>
+				<legend>Favorite Quotes</legend>
+				{% for fave in faves %}
+				<div>
+					<p>{{ fave['quote_author'] }}: {{ fave['quote'] }}</p>
+					<p>Posted by: <a href="/userpage/{{fave['p_id']}}">{{fave['name']}}</a></p>
+					<a href="/deletefavorite/{{session['logged_user']['id']}}"><button>Delete From Favorites</button></a>
+				</div>
+				{% endfor %}
+			</fieldset>
+		</div>
+		<div id="postquote">
+			<p>Contribute a Quote:</p>
+			<form action="/postquote/{{session['logged_user']['id']}}" method="POST">
+				<label>Quoted By:</label>
+					<input type="text" name="quote_author">
+				<label>Message:</label>
+					<textarea name="quote" cols="30" rows="6"></textarea>
+				<input type="submit" value="Post">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

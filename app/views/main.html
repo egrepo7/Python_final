@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		fieldset {
+			width:15%;
+		}
+		label {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>Welcome!</h1>
+	{{ session['success'] }}
+	{% with errors = get_flashed_messages() %}
+	<fieldset>
+		<legend>Register</legend>
+			<form action="/register" method="POST">
+				<label>Name:</label>
+					<input type="text" name="reg_name">
+					{% if errors[0] %}
+					<p>{{ errors[0]['reg_name'] }}</p>
+					{% endif %}
+				<label>Alias:</label>
+					<input type="text" name="reg_alias">
+					{% if errors[0] %}
+					<p>{{ errors[0]['reg_alias'] }}</p>
+					{% endif %}
+				<label>Email:</label>
+					<input type="text" name="reg_email">
+					{% if errors[0] %}
+					<p>{{ errors[0]['reg_email'] }}</p>
+					{% endif %}
+				<label>Password:</label>
+					<input type="password" name="reg_password">
+					{% if errors[0] %}
+					<p>{{ errors[0]['reg_password'] }}</p>
+					{% endif %}
+				<label>Confirm PW:</label>
+					<input type="password" name="reg_confirm">
+					{% if errors[0] %}
+					<p>{{ errors[0]['reg_confirm'] }}</p>
+					{% endif %}
+				<label>Date of Birth:</label>
+					<input type="date" name="reg_dob">
+					{% if errors[0] %}
+					<p>{{ errors[0]['reg_dob'] }}</p>
+					{% endif %}
+				<input type="submit" value="Register">
+			</form>
+		
+	</fieldset>
+	<fieldset>
+		<legend>Login</legend>
+			<form action="/login" method="POST">
+				<label>Email:</label>
+					<input type="text" name="log_email">
+					{% if errors[0] %}
+					<p>{{ errors[0]['nouser'] }}</p>
+					{% endif %}
+					{% if errors[0] %}
+					<p>{{ errors[0]['log_email'] }}</p>
+					{% endif %}
+				<label>Password:</label>
+					<input type="password" name="log_password">
+					{% if errors[0] %}
+					<p>{{ errors[0]['passmatch'] }}</p>
+					{% endif %}
+					{% if errors[0] %}
+					<p>{{ errors[0]['log_password'] }}</p>
+					{% endif %}
+				<input type="submit" value="Login">
+			</form>
+	</fieldset>
+	{% endwith %}
+</body>
+</html>
